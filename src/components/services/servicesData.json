@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Polycystic Ovary Syndrome (PCOS)",
+    "description": "PCOS is a hormonal disorder that affects the ovaries, causing them to develop small cysts. It can lead to irregular menstrual cycles, excess hair growth, acne, and weight gain. PCOS may also impact fertility.",
+    "symptoms": [
+      "Irregular periods",
+      "Heavy bleeding",
+      "Acne",
+      "Excessive hair growth (hirsutism)",
+      "Weight gain",
+      "Mood swings",
+      "Depression",
+      "Anxiety"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Depression and Anxiety",
+    "description": "Mental health disorders like depression and anxiety are more common in women. They can affect mood, emotions, and daily functioning.",
+    "symptoms": [
+      "Persistent sadness",
+      "Loss of interest",
+      "Changes in appetite",
+      "Difficulty sleeping",
+      "Fatigue",
+      "Irritability",
+      "Excessive worry",
+      "Restlessness",
+      "Difficulty concentrating",
+      "Panic attacks"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Osteoporosis",
+    "description": "Osteoporosis is a bone disease that weakens bones and increases the risk of fractures. It is more prevalent in women, especially after menopause.",
+    "symptoms": [
+      "Fractures (often without noticeable symptoms)",
+      "Pain",
+      "Loss of height",
+      "Stooped posture"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Urinary Tract Infections (UTIs)",
+    "description": "UTIs are bacterial infections that affect any part of the urinary system, including the bladder, urethra, and kidneys. They are more common in women due to their shorter urethra.",
+    "symptoms": [
+      "Frequent urination",
+      "Burning sensation during urination",
+      "Cloudy or bloody urine",
+      "Strong-smelling urine",
+      "Pelvic pain"
+    ]
+  }
+]

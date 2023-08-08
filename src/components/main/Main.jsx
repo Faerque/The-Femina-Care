@@ -9,7 +9,6 @@ import Navbar from "../global/Navbar/Navbar"
 function Main() {
     const { isLoginModal, setIsLoginModal, isSignupModal, setIsSignUpModal } = useContext(authModal)
 
-    console.log(isLoginModal)
     return (
         <div>
             <Navbar />

@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Mainboard from './components/UserDashboard/Mainboard'
 import UserInformation from './components/UserDashboard/UserInformation/UserInformation'
 import Services from './components/services/Services'
+import AuthChecking from './components/auth/authChecking'
+import UserConsultationInformation from './components/UserDashboard/UserConsultationInformation/UserConsultationInformation'
+
 
 function App() {
 
@@ -19,12 +22,16 @@ function App() {
         <authModal.Provider value={{ isLoginModal, setIsLoginModal, isSignupModal, setIsSignUpModal }}>
           <Routes>
             <Route path='/' element={<Main />} />
-            <Route path='/dashboard' element={<Mainboard />} />
-            <Route path='/dashboard/userInformation' element={<UserInformation />} />
-            <Route path='/Services' element={<Services />} />
+            <Route path='/*' element={<AuthChecking />}>
+              <Route path='Services' element={<Services />} />
+              <Route path='dashboard' element={<Mainboard />} />
+              <Route path='dashboard/userInformation' element={<UserInformation />} />
+              <Route path='dashboard/userConsultation' element={<UserConsultationInformation />} />
+            </Route>
           </Routes>
         </authModal.Provider>
       </BrowserRouter>
+
     </>
   )
 }

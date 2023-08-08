@@ -1,19 +1,44 @@
 // import FeminaCare from '../../../assets/images/Femina_Care_Logo.png'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import FeminaCareLogoWithText from '../../../assets/images/Femina_Care_Logo_with_name.png'
 import authModal from '../../../context/authContext'
+import { useNavigate } from 'react-router-dom'
+import login from './loginFunction'
 
 
 function Login() {
 
     const { isLoginModal, setIsLoginModal, isSignupModal, setIsSignUpModal } = useContext(authModal)
+    const [isLoginLoading, setIsLoginLoading] = useState(false)
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    })
 
-    console.log(isLoginModal)
+    const { email, password } = formData
 
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
     const handleModal = () => {
         setIsLoginModal(false)
         setIsSignUpModal(true)
     }
+
+    const navigate = useNavigate()
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        setIsLoginLoading(true)
+        try {
+            const res = await login(email, password)
+            if (res) {
+                setIsLoginLoading(false);
+                navigate('/dashboard');
+            }
+        } catch (error) {
+            setIsLoginLoading(false);
+        }
+    }
+
+
     const passwordForgetMsg = 'if you forget your password.We can do nothing'
     return (
         <div>
@@ -38,22 +63,41 @@ function Login() {
                                 Welcome back to The Femina Care!
                             </p>
                         </div>
-                        <div className="mt-4">
-                            <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="LoggingEmailAddress">Email Address</label>
-                            <input id="LoggingEmailAddress" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-pink-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-pink-300" type="email" />
-                        </div>
-                        <div className="mt-4">
-                            <div className="flex justify-between">
-                                <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="loggingPassword">Password</label>
-                                <a href="#" className="tooltip text-xs text-gray-500 hover:underline" data-tip={passwordForgetMsg}>Forget Password?</a>
+                        <form onSubmit={e => onSubmit(e)}>
+                            <div className="mt-4">
+                                <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="LoggingEmailAddress">Email Address</label>
+                                <input id="LoggingEmailAddress" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-pink-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-pink-300"
+                                    placeholder="Enter your email address"
+                                    value={email}
+                                    name='email'
+                                    onChange={e => onChange(e)}
+                                    required
+                                    type="email" />
                             </div>
-                            <input id="loggingPassword" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-pink-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-pink-300" type="password" />
-                        </div>
-                        <div className="mt-6">
-                            <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-pink-500 rounded-lg hover:bg-pink-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
-                                Sign In
-                            </button>
-                        </div>
+                            <div className="mt-4">
+                                <div className="flex justify-between">
+                                    <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="loggingPassword">Password</label>
+                                    <a href="#" className="tooltip text-xs text-gray-500 hover:underline" data-tip={passwordForgetMsg}>Forget Password?</a>
+                                </div>
+                                <input id="loggingPassword" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg focus:border-pink-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-pink-300"
+                                    value={password}
+                                    onChange={(e) => onChange(e)}
+                                    name='password'
+                                    required
+                                    minLength="8"
+                                    placeholder="Enter your password"
+                                    aria-label="Enter your password"
+                                    // Adding 'title' attribute to provide more context when hovering
+                                    title="Password (Minimum 8 characters)"
+                                    type="password" />
+                            </div>
+                            <div className="mt-6">
+                                <button type='submit' className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-pink-500 rounded-lg hover:bg-pink-600 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+
                         <div className="flex items-center justify-between mt-4">
                             <span className="w-1/3 border-b border-gray-600 md:w-1/3"></span>
 
